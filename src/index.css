@@ -1,0 +1,29 @@
+@import 'tailwindcss';
+
+/* Career Maker's Academy — brand from logo */
+@theme {
+  --font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Outfit', ui-sans-serif, system-ui, sans-serif;
+
+  --color-cma-blue: #4b5fa5;
+  --color-cma-blue-dark: #3a4a7a;
+  --color-cma-blue-muted: #e8ecf7;
+  --color-cma-yellow: #f2b327;
+  --color-cma-yellow-soft: #fdf6e4;
+  --color-cma-magenta: #b63e97;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+}
