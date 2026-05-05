@@ -2,6 +2,7 @@ import { Navbar } from './components/Navbar'
 import { Hero } from './components/Hero'
 import { Courses } from './components/Courses'
 import { WhyChooseUs } from './components/WhyChooseUs'
+import { Faculty } from './components/Faculty'
 import { Results } from './components/Results'
 import { Testimonials } from './components/Testimonials'
 import { Gallery } from './components/Gallery'
@@ -17,6 +18,7 @@ function App() {
         <Hero />
         <Courses />
         <WhyChooseUs />
+        <Faculty />
         <Results />
         <Testimonials />
         <Gallery />

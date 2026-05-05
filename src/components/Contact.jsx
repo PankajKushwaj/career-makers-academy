@@ -33,6 +33,19 @@ const initialForm = {
   message: '',
 }
 
+const getClassLabel = (classValue) =>
+  CLASS_OPTIONS.find((option) => option.value === classValue)?.label || 'Not selected'
+
+const buildEnquiryMessage = (formData) =>
+  [
+    "Hello, I want to enquire about Career Maker's Academy.",
+    '',
+    `Name: ${formData.name.trim() || 'Not provided'}`,
+    `Phone: ${formData.phone.trim()}`,
+    `Class / program: ${getClassLabel(formData.class)}`,
+    `Message: ${formData.message.trim() || 'Not provided'}`,
+  ].join('\n')
+
 export function Contact() {
   const [form, setForm] = useState(initialForm)
   const [submitted, setSubmitted] = useState(false)
@@ -51,7 +64,11 @@ export function Contact() {
       setError('Please enter your phone number so we can call you back.')
       return
     }
-    // Dummy submit — connect to your backend or form service later
+    const whatsappUrl = getWhatsAppUrl(buildEnquiryMessage(form))
+    const whatsappWindow = window.open(whatsappUrl, '_blank', 'noopener,noreferrer')
+    if (!whatsappWindow) {
+      window.location.href = whatsappUrl
+    }
     setSubmitted(true)
     setForm(initialForm)
   }
@@ -289,8 +306,8 @@ export function Contact() {
                   exit={{ opacity: 0 }}
                   className="mt-4 rounded-2xl border border-cma-blue/25 bg-cma-blue-muted px-4 py-3 text-sm font-medium text-cma-blue-dark dark:border-cma-yellow/30 dark:bg-cma-blue/20 dark:text-cma-yellow-soft"
                 >
-                  Thank you! We’ve received your enquiry and will contact you
-                  shortly. (Demo — no data was sent.)
+                  Your enquiry details are ready in WhatsApp. Please tap send
+                  there to share them with us.
                 </motion.div>
               ) : null}
             </AnimatePresence>

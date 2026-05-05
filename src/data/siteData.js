@@ -44,6 +44,7 @@ export const SOCIAL_LINKS = {
 export const NAV_LINKS = [
   { label: 'Home', href: '#home' },
   { label: 'Courses', href: '#courses' },
+  { label: 'Faculty', href: '#faculty' },
   { label: 'Results', href: '#results' },
   { label: 'Gallery', href: '#gallery' },
   { label: 'Contact', href: '#contact' },
@@ -124,6 +125,12 @@ export const WHY_CHOOSE_US = [
       'We teach for understanding, but every class moves you toward better scores.',
     icon: 'results',
   },
+]
+
+export const FACULTY = [
+  { subject: 'Maths', name: 'Chanchal Mudgal' },
+  { subject: 'Physics', name: 'Shobhit Pandey' },
+  { subject: 'Chemistry', name: 'Kishor Shrivastav' },
 ]
 
 export const STATS = [
@@ -218,6 +225,6 @@ export const CLASS_OPTIONS = [
   { value: 'others', label: 'Others' },
 ]
 
-export function getWhatsAppUrl() {
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`
+export function getWhatsAppUrl(message = WHATSAPP_MESSAGE) {
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`
 }
