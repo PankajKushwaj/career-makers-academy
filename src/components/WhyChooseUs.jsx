@@ -51,7 +51,7 @@ export function WhyChooseUs() {
           variants={container}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, margin: '-50px' }}
+          viewport={{ once: false, margin: '-50px' }}
         >
           {WHY_CHOOSE_US.map((f) => {
             const Icon = iconMap[f.icon] ?? FaTrophy

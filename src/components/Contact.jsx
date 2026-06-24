@@ -78,6 +78,7 @@ export function Contact() {
       id="contact"
       className="relative overflow-hidden bg-gradient-to-br from-cma-blue-muted via-white to-cma-yellow-soft py-16 md:py-24 dark:from-slate-950 dark:via-slate-950 dark:to-cma-blue-dark/40"
     >
+      <div id="admission" className="block h-0 scroll-mt-28" aria-hidden="true" />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,rgba(242,179,39,0.12),transparent_45%)]" />
       <div className="relative mx-auto max-w-6xl px-4 md:px-6">
         <SectionHeading
@@ -91,7 +92,7 @@ export function Contact() {
             className="flex flex-col gap-6 rounded-3xl border border-slate-200/80 bg-white/90 p-6 shadow-lg backdrop-blur dark:border-slate-800 dark:bg-slate-900/80 md:p-8"
             initial={{ opacity: 0, x: -16 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-40px' }}
+            viewport={{ once: false, margin: '-40px' }}
             transition={{ duration: 0.45 }}
           >
             <div>
@@ -197,7 +198,7 @@ export function Contact() {
             className="rounded-3xl border border-slate-200/80 bg-white/90 p-6 shadow-lg backdrop-blur dark:border-slate-800 dark:bg-slate-900/80 md:p-8"
             initial={{ opacity: 0, x: 16 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-40px' }}
+            viewport={{ once: false, margin: '-40px' }}
             transition={{ duration: 0.45 }}
           >
             <h3 className="font-display text-xl font-bold text-slate-900 dark:text-white">
@@ -318,7 +319,7 @@ export function Contact() {
           className="mt-10 overflow-hidden rounded-3xl border border-slate-200 shadow-md dark:border-slate-800"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-40px' }}
+          viewport={{ once: false, margin: '-40px' }}
           transition={{ duration: 0.5 }}
         >
           <iframe

@@ -1,19 +1,19 @@
 /**
- * Replace values here to customize the site (branding, contact, links).
- * WhatsApp number: country code + number, digits only (no + or spaces).
+ * Central site content for Career Maker's Academy.
+ * WhatsApp number: country code + number, digits only.
  */
 
 export const SITE_NAME = "Career Maker's Academy"
-/** Logo file in /public — swap the PNG to update artwork */
+export const BRAND_WORDMARK = 'Career Makers Academy'
 export const LOGO_SRC = '/logo.png'
 export const FOUNDER_IMAGE_SRC = '/founder.png'
 
 export const SITE_TAGLINE =
-  "Let's build your career — expert coaching for boards, JEE, NEET & beyond, with personal attention at every step."
+  'Expert faculty, proven results, and career-focused education for boards, JEE, NEET, and foundation students.'
 
 export const WHATSAPP_NUMBER = '918769516329'
 export const WHATSAPP_MESSAGE =
-  'Hello, I want to know about your coaching classes.'
+  "Hello, I want to apply for admission at Career Maker's Academy."
 
 export const PHONE_DISPLAY = '+91 87695 16329'
 export const PHONE_TEL = '+918769516329'
@@ -26,12 +26,9 @@ export const INSTAGRAM_HANDLE = '@cma_dholpur'
 export const ADDRESS =
   "Career Maker's Academy CMA, Behind Rana Marriage Garden, SR Colony, GT Road, Dholpur - 328001, Rajasthan"
 
-export const COACHING_TIMINGS = 'Daily: 7:00 AM – 7:30 PM (Mon–Sun)'
+export const COACHING_TIMINGS = 'Daily: 7:00 AM - 7:30 PM (Mon-Sun)'
 
-/** Google Maps search URL for “Get directions” — swap for your location */
 export const MAPS_DIRECTIONS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ADDRESS)}`
-
-/** Google Maps embed generated from the coaching centre address. */
 export const MAP_EMBED_URL = `https://www.google.com/maps?q=${encodeURIComponent(ADDRESS)}&output=embed`
 
 export const SOCIAL_LINKS = {
@@ -44,85 +41,121 @@ export const SOCIAL_LINKS = {
 export const NAV_LINKS = [
   { label: 'Home', href: '#home' },
   { label: 'Courses', href: '#courses' },
-  { label: 'Faculty', href: '#faculty' },
-  { label: 'Results', href: '#results' },
-  { label: 'Gallery', href: '#gallery' },
+  { label: 'Toppers', href: '#toppers' },
+  { label: 'Results', href: '#result-portal' },
+  { label: 'Apply', href: '#admission' },
   { label: 'Contact', href: '#contact' },
 ]
 
+export const HERO_STATS = [
+  { value: 1000, suffix: '+', label: 'Students' },
+  { value: 95, suffix: '%', label: 'Success rate' },
+  { value: 12, suffix: '+', label: 'Expert faculty' },
+  { value: 5, suffix: '+', label: 'Courses' },
+]
+
+export const TRUST_STATS = [
+  { value: 10, suffix: '+', label: 'Years of excellence' },
+  { value: 1000, suffix: '+', label: 'Students mentored' },
+  { value: 300, suffix: '+', label: 'Career selections' },
+  { value: 12, suffix: '+', label: 'Faculty mentors' },
+]
+
+export const STATS = TRUST_STATS
+
 export const COURSES = [
   {
-    id: 'c1',
-    title: 'Class 9–10 Foundation',
+    id: 'foundation',
+    title: 'Class 9-10 Foundation',
     description:
-      'Strong basics in Maths & Science with exam-style practice and mentoring.',
+      'Strong fundamentals in Maths and Science with board-focused tests and habit-building mentorship.',
+    duration: '10 months',
+    eligibility: 'Class 9-10',
+    fees: 'Enquire',
     icon: 'foundation',
+    highlights: ['NCERT mastery', 'Weekly tests', 'Doubt desk', 'Parent updates'],
   },
   {
-    id: 'c2',
-    title: 'Class 11–12 Science',
+    id: 'science',
+    title: 'Class 11-12 Science',
     description:
-      'PCM/PCB tracks with structured notes, tests, and board + competitive alignment.',
+      'PCM/PCB coaching with structured notes, board alignment, and competitive exam readiness.',
+    duration: '12 months',
+    eligibility: 'Class 11-12',
+    fees: 'Enquire',
     icon: 'science',
+    highlights: ['Physics', 'Chemistry', 'Maths/Biology', 'Board + entrance'],
   },
   {
-    id: 'c4',
+    id: 'jee',
     title: 'JEE Preparation',
     description:
-      'Concept-first problem solving, DPPs, and full tests for JEE Main & Advanced.',
+      'Concept-first problem solving, DPPs, doubt support, and full-length tests for serious aspirants.',
+    duration: '1-2 years',
+    eligibility: 'Class 11-12 / Dropper',
+    fees: 'Enquire',
     icon: 'jee',
+    highlights: ['DPP practice', 'Mock tests', 'Rank tracking', 'Advanced concepts'],
   },
   {
-    id: 'c5',
+    id: 'neet',
     title: 'NEET Preparation',
     description:
-      'NCERT-deep Biology, Chemistry & Physics with clinical-style MCQ practice.',
+      'NCERT-deep Biology, Chemistry, and Physics with exam-style MCQ practice and analysis.',
+    duration: '1-2 years',
+    eligibility: 'Class 11-12 / Dropper',
+    fees: 'Enquire',
     icon: 'neet',
+    highlights: ['NCERT focus', 'MCQ drills', 'Bio mastery', 'Test analysis'],
   },
   {
-    id: 'c6',
+    id: 'skills',
     title: 'Spoken English / Computer Basics',
     description:
-      'Communication confidence plus practical digital skills for school & career.',
+      'Practical communication confidence and digital skills for school, college, and career readiness.',
+    duration: '3 months',
+    eligibility: 'Open batch',
+    fees: 'Enquire',
     icon: 'skills',
+    highlights: ['Speaking practice', 'Computer basics', 'Confidence', 'Career skills'],
   },
 ]
 
 export const WHY_CHOOSE_US = [
   {
-    title: 'Experienced teachers',
+    title: 'Experienced Faculty',
     description:
-      'Faculty with years of classroom results and a calm, student-first approach.',
+      'Subject mentors who simplify tough concepts and keep every learner accountable.',
     icon: 'teachers',
   },
   {
-    title: 'Weekly tests',
+    title: 'Regular Assessments',
     description:
-      'Timed assessments with feedback so gaps never pile up till the exam.',
+      'Weekly tests, detailed review, and improvement plans before weak areas become habits.',
     icon: 'tests',
   },
   {
-    title: 'Doubt solving',
+    title: 'Career Guidance',
     description:
-      'Dedicated doubt counters and one-on-one clarity when you need it.',
-    icon: 'doubt',
+      'Personal counselling for boards, competitive exams, and realistic academic planning.',
+    icon: 'guidance',
   },
   {
-    title: 'Personal attention',
+    title: 'Personalized Mentorship',
     description:
-      'Smaller batches and tracking — no student gets lost in the crowd.',
-    icon: 'attention',
+      'Smaller batches, individual attention, and close progress tracking for each student.',
+    icon: 'mentorship',
   },
   {
-    title: 'Updated study material',
+    title: 'Digital Learning Resources',
     description:
-      'Notes and sheets refreshed every session to match the latest pattern.',
-    icon: 'material',
+      'Notes, practice material, assignments, and updates designed for modern learners.',
+    icon: 'digital',
   },
   {
-    title: 'Result-focused teaching',
+    title: 'Result-Oriented Approach',
     description:
-      'We teach for understanding, but every class moves you toward better scores.',
+      'Every class, test, and doubt session is aligned with measurable academic growth.',
     icon: 'results',
   },
 ]
@@ -133,95 +166,210 @@ export const FACULTY = [
   { subject: 'Chemistry', name: 'Kishor Shrivastav' },
 ]
 
-export const STATS = [
-  { value: 500, suffix: '+', label: 'Students taught' },
-  { value: 95, suffix: '%', label: 'Success rate' },
-  { value: 10, suffix: '+', label: 'Years experience' },
-  { value: 50, suffix: '+', label: 'Top results' },
+export const TOPPERS = [
+  {
+    name: 'Pankaj Kushwah',
+    course: 'Science',
+    rank: 'Batch Topper',
+    percentage: '96%',
+    badge: 'Physics Excellence',
+    image: '/gallery/01.png',
+    year: '2025',
+  },
+  {
+    name: 'Aaditya Gurjar',
+    course: 'Science',
+    rank: 'Top 5',
+    percentage: '94%',
+    badge: 'Consistent Performer',
+    image: '/gallery/02.png',
+    year: '2025',
+  },
+  {
+    name: 'Ankush Sharma',
+    course: 'JEE',
+    rank: 'Scholar Batch',
+    percentage: '92%',
+    badge: 'Problem Solver',
+    image: '/gallery/03.png',
+    year: '2025',
+  },
+  {
+    name: 'Vinayak Parmar',
+    course: 'NEET',
+    rank: 'Top Scorer',
+    percentage: '93%',
+    badge: 'Biology Star',
+    image: '/gallery/04.png',
+    year: '2025',
+  },
+]
+
+export const RESULT_RECORDS = [
+  {
+    roll: 'CMA2501',
+    name: 'Pankaj Kushwah',
+    course: 'Science',
+    batch: 'Morning',
+    year: '2025',
+    score: 96,
+    status: 'Topper',
+  },
+  {
+    roll: 'CMA2502',
+    name: 'Aaditya Gurjar',
+    course: 'Science',
+    batch: 'Evening',
+    year: '2025',
+    score: 94,
+    status: 'Distinction',
+  },
+  {
+    roll: 'CMA2503',
+    name: 'Ankush Sharma',
+    course: 'JEE',
+    batch: 'Scholar',
+    year: '2025',
+    score: 92,
+    status: 'Selected',
+  },
+  {
+    roll: 'CMA2504',
+    name: 'Vinayak Parmar',
+    course: 'NEET',
+    batch: 'Target',
+    year: '2025',
+    score: 93,
+    status: 'Selected',
+  },
+  {
+    roll: 'CMA2505',
+    name: 'Ram Sharma',
+    course: 'Science',
+    batch: 'Morning',
+    year: '2025',
+    score: 91,
+    status: 'Distinction',
+  },
 ]
 
 export const TESTIMONIALS = [
   {
-    name: 'Ananya Sharma',
-    course: 'NEET · Class 12',
-    text: 'The faculty made Biology feel logical. Mock tests here matched the real exam pressure — I felt ready.',
-  },
-  {
-    name: 'Rohan Mehta',
-    course: 'JEE · Drop year',
-    text: 'Doubt sessions saved me. Every mistake became a lesson. Finally cracked my target college.',
-  },
-  {
-    name: 'Priya Nair',
-    course: 'Class 10 Foundation',
-    text: 'I was weak in Maths; now I actually enjoy solving problems. Weekly tests kept me consistent.',
-  },
-  {
     name: 'Pankaj Kushwah',
-    course: 'Science · Class 12',
-    text: 'Science concepts became much clearer with regular practice, tests, and personal guidance.',
+    course: 'Science - Class 12',
+    image: '/gallery/01.png',
+    rating: 5,
+    parent: 'Parent review',
+    text: 'The teachers made Science concepts clear with regular practice, tests, and personal guidance.',
+    story: 'Improved test scores by staying consistent through weekly review sessions.',
+    video: true,
   },
   {
     name: 'Ankush Sharma',
-    course: 'Science · Class 12',
-    text: 'The teachers explained Physics and Chemistry in a simple way, which helped me stay confident.',
-  },
-  {
-    name: 'Ram Sharma',
-    course: 'Science · Class 12',
-    text: 'Weekly tests and doubt sessions helped me improve steadily throughout the year.',
+    course: 'JEE Foundation',
+    image: '/gallery/03.png',
+    rating: 5,
+    parent: 'Student review',
+    text: 'Physics and Chemistry became easier because every doubt was solved in a simple way.',
+    story: 'Built confidence through DPPs and mock-test feedback.',
+    video: false,
   },
   {
     name: 'Aaditya Gurjar',
-    course: 'Science · Class 12',
-    text: 'The study plan and regular feedback made board preparation feel organised and manageable.',
-  },
-  {
-    name: 'Vinayak Parmar',
-    course: 'Science · Class 12',
-    text: 'Personal attention from the faculty helped me strengthen my weak topics in Science.',
+    course: 'Science - Class 12',
+    image: '/gallery/02.png',
+    rating: 5,
+    parent: 'Parent review',
+    text: 'The study plan and feedback made board preparation organised and manageable.',
+    story: 'Moved from irregular preparation to a disciplined weekly rhythm.',
+    video: true,
   },
 ]
 
-/** Local files in /public/gallery — add or reorder slides here */
 export const GALLERY_SLIDES = [
   {
     src: '/gallery/01.png',
+    category: 'Toppers',
     caption:
-      "Class 12th RBSE & CBSE achiever honoured — award ceremony at Career Maker's Academy",
+      "Class 12th RBSE & CBSE achiever honoured - award ceremony at Career Maker's Academy",
   },
   {
     src: '/gallery/02.png',
+    category: 'Events',
     caption:
-      'Celebrating success — student receives framed award with faculty at CMA, Dholpur',
+      'Celebrating success - student receives framed award with faculty at CMA, Dholpur',
   },
   {
     src: '/gallery/03.png',
+    category: 'Toppers',
     caption:
-      'Recognition in the spotlight — award presentation with our results showcase',
+      'Recognition in the spotlight - award presentation with our results showcase',
   },
   {
     src: '/gallery/04.png',
+    category: 'Events',
     caption:
-      'Excellence recognised — ceremony with Class 10th & 12th result displays',
+      'Excellence recognised - ceremony with Class 10th and 12th result displays',
   },
   {
     src: '/gallery/05.png',
-    caption:
-      'Medal and merit — celebrating board results with the CMA family',
+    category: 'Activities',
+    caption: 'Medal and merit - celebrating board results with the CMA family',
   },
   {
     src: '/gallery/06.png',
+    category: 'Classrooms',
     caption:
-      'Faculty and achievers — RBSE & CBSE 2024–25 celebration at our centre',
+      'Faculty and achievers - RBSE and CBSE celebration at our centre',
   },
 ]
 
+export const FAQS = [
+  {
+    question: 'How do I apply for admission?',
+    answer:
+      'Fill the admission form on this website, call us, or message on WhatsApp. Our counsellor will share batch timings and guide you through the next step.',
+  },
+  {
+    question: 'Do students get regular tests?',
+    answer:
+      'Yes. Students receive regular assessments, performance review, and doubt support to improve steadily.',
+  },
+  {
+    question: 'Are demo classes available?',
+    answer:
+      'Yes. You can book a free demo class before final admission to experience the teaching approach.',
+  },
+  {
+    question: 'Which courses are currently available?',
+    answer:
+      'CMA offers Class 9-10 Foundation, Class 11-12 Science, JEE, NEET, Spoken English, and Computer Basics.',
+  },
+]
+
+export const DASHBOARD_METRICS = [
+  { label: 'Total students', value: 1000, suffix: '+', trend: '+18%' },
+  { label: 'New admissions', value: 86, suffix: '', trend: '+24%' },
+  { label: 'Fees collected', value: 12, suffix: 'L', trend: '+16%' },
+  { label: 'Results uploaded', value: 148, suffix: '', trend: '+31%' },
+  { label: 'Active courses', value: 5, suffix: '', trend: 'Live' },
+  { label: 'Gallery images', value: 64, suffix: '', trend: '+12' },
+]
+
+export const ADMISSION_STEPS = [
+  'Student Information',
+  'Academic Details',
+  'Course Selection',
+  'Parent Information',
+  'Review & Submit',
+]
+
 export const CLASS_OPTIONS = [
-  { value: '9-10', label: 'Class 9–10' },
-  { value: '11-12-science', label: 'Class 11–12 Science' },
-  { value: 'jee', label: 'JEE' },
-  { value: 'neet', label: 'NEET' },
+  { value: '9-10', label: 'Class 9-10 Foundation' },
+  { value: '11-12-science', label: 'Class 11-12 Science' },
+  { value: 'jee', label: 'JEE Preparation' },
+  { value: 'neet', label: 'NEET Preparation' },
+  { value: 'spoken-computer', label: 'Spoken English / Computer Basics' },
   { value: 'others', label: 'Others' },
 ]
 

@@ -11,7 +11,6 @@ import {
   SITE_TAGLINE,
   getWhatsAppUrl,
 } from '../data/siteData'
-import { BrandLockup } from './BrandLockup'
 
 const floatIcons = [
   { Icon: FaGraduationCap, className: 'left-[8%] top-[18%] text-cma-blue/90' },
@@ -52,16 +51,6 @@ export function Hero() {
 
       <div className="relative mx-auto flex max-w-6xl flex-col gap-10 px-4 pb-20 pt-14 md:flex-row md:items-center md:px-6 md:pb-24 md:pt-20">
         <div className="flex-1 text-left">
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45 }}
-          >
-            <BrandLockup
-              logoClassName="h-24 w-24 md:h-28 md:w-28"
-              textClassName="text-3xl md:text-4xl"
-            />
-          </motion.div>
           <motion.p
             className="mt-5 text-sm font-semibold text-cma-blue dark:text-cma-yellow"
             initial={{ opacity: 0, y: 12 }}

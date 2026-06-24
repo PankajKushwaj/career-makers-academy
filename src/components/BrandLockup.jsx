@@ -3,15 +3,23 @@ import { LOGO_SRC, SITE_NAME } from '../data/siteData'
 export function BrandLockup({
   className = '',
   dark = false,
+  tone = 'brand',
   logoClassName = 'h-16 w-16 md:h-20 md:w-20',
   showTagline = true,
   textClassName = 'text-lg md:text-xl',
 }) {
-  const careerColor = dark
+  const neutralTone = tone === 'neutral'
+  const careerColor = neutralTone
+    ? 'text-slate-900'
+    : dark
     ? 'text-white'
     : 'bg-gradient-to-r from-cma-blue-dark to-cma-blue bg-clip-text text-transparent'
-  const taglineColor = dark ? 'text-white/65' : 'text-slate-500'
-  const academyShadow = dark
+  const makersColor = neutralTone ? 'text-slate-900' : 'text-cma-yellow'
+  const academyColor = neutralTone ? 'text-slate-900' : 'text-white'
+  const taglineColor = neutralTone ? 'text-slate-600' : dark ? 'text-white/65' : 'text-slate-500'
+  const academyShadow = neutralTone
+    ? 'none'
+    : dark
     ? '0 1px 10px rgba(242, 179, 39, 0.2)'
     : '0 1px 2px rgba(58, 74, 122, 0.75), 0 0 1px rgba(58, 74, 122, 0.9)'
 
@@ -27,8 +35,8 @@ export function BrandLockup({
           className={`block font-display ${textClassName} font-extrabold leading-tight drop-shadow-sm`}
         >
           <span className={careerColor}>Career</span>{' '}
-          <span className="text-cma-yellow">Makers</span>{' '}
-          <span className="text-white" style={{ textShadow: academyShadow }}>
+          <span className={makersColor}>Makers</span>{' '}
+          <span className={academyColor} style={{ textShadow: academyShadow }}>
             Academy
           </span>
         </span>

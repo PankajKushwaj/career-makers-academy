@@ -56,6 +56,7 @@ export function Gallery() {
       id="gallery"
       className="bg-gradient-to-b from-cma-blue-muted/50 to-white py-16 md:py-24 dark:from-slate-900 dark:to-slate-950"
     >
+      <div id="toppers" className="block h-0 scroll-mt-28" aria-hidden="true" />
       <div className="mx-auto max-w-6xl px-4 md:px-6">
         <SectionHeading
           eyebrow="Gallery"
@@ -67,7 +68,7 @@ export function Gallery() {
           className="relative mx-auto max-w-4xl"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
+          viewport={{ once: false, margin: '-60px' }}
           transition={{ duration: 0.5 }}
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}

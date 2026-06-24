@@ -48,7 +48,7 @@ export function Courses() {
           variants={container}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, margin: '-60px' }}
+          viewport={{ once: false, margin: '-60px' }}
         >
           {COURSES.map((course) => {
             const Icon = iconMap[course.icon] ?? FaSchool

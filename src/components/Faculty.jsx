@@ -40,7 +40,7 @@ export function Faculty() {
           variants={container}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, margin: '-50px' }}
+          viewport={{ once: false, margin: '-50px' }}
         >
           {FACULTY.map((faculty) => {
             const Icon = iconMap[faculty.subject] ?? FaCalculator

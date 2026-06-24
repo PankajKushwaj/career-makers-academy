@@ -16,7 +16,7 @@ export function SectionHeading({
     <motion.div
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-40px' }}
+      viewport={{ once: false, margin: '-40px' }}
       transition={{ duration: 0.45 }}
       className={`mb-10 md:mb-14 ${alignClass} ${className}`}
     >

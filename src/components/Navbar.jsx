@@ -29,20 +29,21 @@ export function Navbar() {
       initial={{ y: -24, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.45 }}
-      className={`sticky top-0 z-50 border-b transition-colors ${
+      className={`sticky top-0 z-50 border-b border-sky-200/80 transition-colors ${
         scrolled
-          ? 'border-slate-200/80 bg-white/85 shadow-sm backdrop-blur-md dark:border-slate-700/80 dark:bg-slate-950/85'
-          : 'border-transparent bg-gradient-to-b from-white/90 to-white/60 backdrop-blur-sm dark:from-slate-950/90 dark:to-slate-950/60'
+          ? 'bg-sky-100 shadow-sm backdrop-blur-md'
+          : 'bg-sky-50 backdrop-blur-sm'
       }`}
     >
-      <nav className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 md:px-6">
+      <nav className="mx-auto flex w-full max-w-[1400px] items-center justify-between gap-3 px-3 py-2 sm:px-4 sm:py-2.5 md:px-6 lg:px-8">
         <a
           href="#home"
           className="group flex min-w-0 items-center"
           onClick={closeMenu}
         >
           <BrandLockup
-            logoClassName="h-14 w-14 md:h-16 md:w-16"
+            tone="neutral"
+            logoClassName="h-14 w-14 sm:h-16 sm:w-16 md:h-20 md:w-20"
             showTagline={false}
             textClassName="text-base md:text-xl"
           />
@@ -53,7 +54,7 @@ export function Navbar() {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="rounded-lg px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-cma-blue-muted hover:text-cma-blue dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white"
+                className="rounded-lg px-3 py-2 text-sm font-medium text-slate-900 transition hover:bg-cma-blue-muted hover:text-black"
               >
                 {link.label}
               </a>
@@ -66,7 +67,7 @@ export function Navbar() {
             href={getWhatsAppUrl()}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex rounded-xl bg-cma-yellow px-4 py-2 text-sm font-semibold text-cma-blue-dark shadow-md shadow-cma-yellow/35 transition hover:brightness-105"
+            className="inline-flex rounded-xl bg-cma-yellow px-4 py-2 text-sm font-semibold text-black shadow-md shadow-cma-yellow/35 transition hover:brightness-105"
           >
             WhatsApp
           </a>
@@ -74,7 +75,7 @@ export function Navbar() {
 
         <button
           type="button"
-          className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-800 md:hidden dark:border-slate-700 dark:bg-slate-900 dark:text-white"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-sky-200 bg-sky-50 text-black md:hidden"
           aria-label={open ? 'Close menu' : 'Open menu'}
           onClick={() => setOpen((v) => !v)}
         >
@@ -89,14 +90,14 @@ export function Navbar() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25 }}
-            className="border-t border-slate-200 bg-white md:hidden dark:border-slate-800 dark:bg-slate-950"
+            className="border-t border-sky-200 bg-sky-50 md:hidden"
           >
             <ul className="flex flex-col px-4 py-3">
               {NAV_LINKS.map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="block rounded-lg px-3 py-3 text-base font-medium text-slate-800 hover:bg-slate-100 dark:text-slate-100 dark:hover:bg-slate-900"
+                    className="block rounded-lg px-3 py-3 text-base font-medium text-slate-900 hover:bg-sky-100 hover:text-black"
                     onClick={closeMenu}
                   >
                     {link.label}
@@ -108,7 +109,7 @@ export function Navbar() {
                   href={getWhatsAppUrl()}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block rounded-xl bg-cma-yellow px-3 py-3 text-center text-base font-semibold text-cma-blue-dark"
+                  className="block rounded-xl bg-cma-yellow px-3 py-3 text-center text-base font-semibold text-black"
                   onClick={closeMenu}
                 >
                   WhatsApp us

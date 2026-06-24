@@ -9,6 +9,11 @@ export function Results() {
       className="relative bg-cma-blue-dark py-16 text-white md:py-24"
     >
       <div
+        id="result-portal"
+        className="block h-0 scroll-mt-28"
+        aria-hidden="true"
+      />
+      <div
         className="pointer-events-none absolute inset-0 opacity-40"
         style={{
           backgroundImage:
@@ -20,7 +25,7 @@ export function Results() {
           className="mx-auto mb-10 max-w-2xl text-center md:mb-14"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-40px' }}
+          viewport={{ once: false, margin: '-40px' }}
           transition={{ duration: 0.45 }}
         >
           <p className="text-sm font-semibold uppercase tracking-wider text-cma-yellow">
@@ -38,7 +43,7 @@ export function Results() {
           className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, margin: '-40px' }}
+          viewport={{ once: false, margin: '-40px' }}
           variants={{
             hidden: { opacity: 0 },
             show: {
