@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Navbar } from './components/Navbar'
 import { Hero } from './components/Hero'
@@ -8,6 +8,11 @@ import { Faculty } from './components/Faculty'
 import { Results } from './components/Results'
 import { Testimonials } from './components/Testimonials'
 import { Gallery } from './components/Gallery'
+import { YearlyToppers } from './components/YearlyToppers'
+import { ResultImages } from './components/ResultImages'
+import { AdmissionProcess } from './components/AdmissionProcess'
+import { Notices } from './components/Notices'
+import { AdminPage } from './components/AdminPage'
 import { Contact } from './components/Contact'
 import { Footer } from './components/Footer'
 import { FloatingWhatsApp } from './components/FloatingWhatsApp'
@@ -54,6 +59,14 @@ function App() {
     return () => document.removeEventListener('click', onClick, true)
   }, [])
 
+  const [route, setRoute] = useState(window.location.hash || '#home')
+
+  useEffect(() => {
+    const onHashChange = () => setRoute(window.location.hash || '#home')
+    window.addEventListener('hashchange', onHashChange)
+    return () => window.removeEventListener('hashchange', onHashChange)
+  }, [])
+
   return (
     <motion.div
       className="min-h-screen bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100"
@@ -62,17 +75,27 @@ function App() {
       transition={{ duration: 0.45, ease: 'easeOut' }}
     >
       <Navbar />
-      <main>
-        <Hero />
-        <Courses />
-        <WhyChooseUs />
-        <Faculty />
-        <Results />
-        <Testimonials />
-        <Gallery />
-        <Contact />
-      </main>
-      <Footer />
+      {route === '#admin' ? (
+        <AdminPage />
+      ) : (
+        <>
+          <main>
+            <Hero />
+            <Notices />
+            <Courses />
+            <WhyChooseUs />
+            <AdmissionProcess />
+            <Faculty />
+            <Results />
+            <YearlyToppers />
+            <ResultImages />
+            <Testimonials />
+            <Gallery />
+            <Contact />
+          </main>
+          <Footer />
+        </>
+      )}
       <FloatingWhatsApp />
     </motion.div>
   )

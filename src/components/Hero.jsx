@@ -52,7 +52,7 @@ export function Hero() {
       <div className="relative mx-auto flex max-w-6xl flex-col gap-10 px-4 pb-20 pt-14 md:flex-row md:items-center md:px-6 md:pb-24 md:pt-20">
         <div className="flex-1 text-left">
           <motion.p
-            className="mt-5 text-sm font-semibold text-cma-blue dark:text-cma-yellow"
+            className="mt-5 inline-flex w-fit rounded-full border border-cma-blue/20 bg-white/70 px-3 py-1 text-sm font-semibold text-cma-blue shadow-sm dark:border-cma-yellow/20 dark:bg-slate-900/70 dark:text-cma-yellow"
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, delay: 0.04 }}

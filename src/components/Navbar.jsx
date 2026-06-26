@@ -35,7 +35,7 @@ export function Navbar() {
           : 'bg-sky-50 backdrop-blur-sm'
       }`}
     >
-      <nav className="mx-auto flex w-full max-w-[1400px] items-center justify-between gap-3 px-3 py-2 sm:px-4 sm:py-2.5 md:px-6 lg:px-8">
+      <nav className="mx-auto flex w-full max-w-[1400px] items-center justify-between gap-3 px-3 py-1.5 sm:px-4 sm:py-2 md:px-6 lg:px-8">
         <a
           href="#home"
           className="group flex min-w-0 items-center"
@@ -43,9 +43,9 @@ export function Navbar() {
         >
           <BrandLockup
             tone="neutral"
-            logoClassName="h-14 w-14 sm:h-16 sm:w-16 md:h-20 md:w-20"
+            logoClassName="h-12 w-12 sm:h-14 sm:w-14 md:h-18 md:w-18"
             showTagline={false}
-            textClassName="text-base md:text-xl"
+            textClassName="text-sm md:text-lg"
           />
         </a>
 

@@ -19,7 +19,7 @@ export const PHONE_DISPLAY = '+91 87695 16329'
 export const PHONE_TEL = '+918769516329'
 export const OTHER_PHONE_DISPLAY = '+91 74259 26655'
 export const OTHER_PHONE_TEL = '+917425926655'
-export const EMAIL = ''
+export const EMAIL = 'careermakersacademy@gmail.com'
 export const DIRECTOR_NAME = 'Er. Shobhit Pandey'
 export const INSTAGRAM_HANDLE = '@cma_dholpur'
 
@@ -41,9 +41,9 @@ export const SOCIAL_LINKS = {
 export const NAV_LINKS = [
   { label: 'Home', href: '#home' },
   { label: 'Courses', href: '#courses' },
-  { label: 'Toppers', href: '#toppers' },
+  { label: 'Why Us', href: '#why-us' },
+  { label: 'Admission', href: '#admission-process' },
   { label: 'Results', href: '#result-portal' },
-  { label: 'Apply', href: '#admission' },
   { label: 'Contact', href: '#contact' },
 ]
 
@@ -127,6 +127,12 @@ export const WHY_CHOOSE_US = [
     description:
       'Subject mentors who simplify tough concepts and keep every learner accountable.',
     icon: 'teachers',
+  },
+  {
+    title: 'Trusted by Parents',
+    description:
+      'Families choose CMA for disciplined teaching, regular feedback, and visible academic growth.',
+    icon: 'trust',
   },
   {
     title: 'Regular Assessments',
@@ -347,6 +353,68 @@ export const FAQS = [
   },
 ]
 
+export const NOTICES = [
+  {
+    id: 'notice-2026-01',
+    title: 'New batch starting soon',
+    message:
+      'Admissions are open for Class 11-12, JEE, NEET, and Foundation courses. Enroll before seats fill up.',
+    type: 'info',
+  },
+  {
+    id: 'notice-2026-02',
+    title: 'Demo classes available',
+    message:
+      'Book a free demo class today to experience our teaching style and batch structure.',
+    type: 'success',
+  },
+]
+
+export const RESULT_IMAGES = [
+  {
+    id: 'result-img-01',
+    src: '/gallery/01.png',
+    title: 'RBSE Top Scorer',
+    caption: 'Class 12 RBSE top scorer celebrated at CMA.',
+    year: '2025',
+  },
+  {
+    id: 'result-img-02',
+    src: '/gallery/03.png',
+    title: 'JEE Result Success',
+    caption: 'Our student cracked JEE with outstanding marks.',
+    year: '2025',
+  },
+  {
+    id: 'result-img-03',
+    src: '/gallery/04.png',
+    title: 'NEET Achiever',
+    caption: 'Top NEET performance captured in the result gallery.',
+    year: '2025',
+  },
+]
+
+export const YEARLY_TOPPERS = [
+  {
+    id: 'topper-2025-01',
+    year: '2025',
+    name: 'Pankaj Kushwah',
+    course: 'Science',
+    rank: 'Batch Topper',
+    percentage: '96%',
+    image: '/gallery/01.png',
+  },
+  {
+    id: 'topper-2024-01',
+    year: '2024',
+    name: 'Aaditya Gurjar',
+    course: 'Science',
+    rank: 'Top 5',
+    percentage: '94%',
+    image: '/gallery/02.png',
+  },
+]
+
 export const DASHBOARD_METRICS = [
   { label: 'Total students', value: 1000, suffix: '+', trend: '+18%' },
   { label: 'New admissions', value: 86, suffix: '', trend: '+24%' },
@@ -364,6 +432,25 @@ export const ADMISSION_STEPS = [
   'Review & Submit',
 ]
 
+export const ADMISSION_PROCESS_STEPS = [
+  {
+    title: 'Share your goal',
+    description: 'Tell us about the student’s class, exam target, and preferred coaching mode.',
+  },
+  {
+    title: 'Get a quick guidance call',
+    description: 'Our counsellor will suggest the right course, timing, and study plan for your child.',
+  },
+  {
+    title: 'Attend a demo class',
+    description: 'Experience the teaching quality and classroom approach before making the final decision.',
+  },
+  {
+    title: 'Join and start learning',
+    description: 'Complete the admission and begin structured preparation with regular assessments.',
+  },
+]
+
 export const CLASS_OPTIONS = [
   { value: '9-10', label: 'Class 9-10 Foundation' },
   { value: '11-12-science', label: 'Class 11-12 Science' },
@@ -375,4 +462,45 @@ export const CLASS_OPTIONS = [
 
 export function getWhatsAppUrl(message = WHATSAPP_MESSAGE) {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`
+}
+
+export const ADMIN_CREDENTIALS = {
+  username: 'admin',
+  password: 'cmaStrongPass1!',
+}
+
+export const ADMIN_SESSION_KEY = 'cma-admin-auth'
+
+const STORAGE_KEYS = {
+  results: 'cma-results',
+  resultImages: 'cma-result-images',
+  yearlyToppers: 'cma-yearly-toppers',
+  gallery: 'cma-gallery',
+  testimonials: 'cma-testimonials',
+  notices: 'cma-notices',
+  courses: 'cma-courses',
+}
+export const STORAGE_KEYS_EXPORT = STORAGE_KEYS
+
+export function loadData(storageKey, defaultValue) {
+  if (typeof window === 'undefined') return defaultValue
+
+  try {
+    const raw = window.localStorage.getItem(storageKey)
+    if (!raw) return defaultValue
+    const parsed = JSON.parse(raw)
+    return Array.isArray(parsed) ? parsed : defaultValue
+  } catch {
+    return defaultValue
+  }
+}
+
+export function saveData(storageKey, value) {
+  if (typeof window === 'undefined') return
+
+  try {
+    window.localStorage.setItem(storageKey, JSON.stringify(value))
+  } catch {
+    // ignore storage failure
+  }
 }

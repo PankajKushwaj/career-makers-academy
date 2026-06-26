@@ -39,6 +39,9 @@ export function Footer() {
             <p className="mt-4 max-w-md text-sm leading-relaxed text-white/75">
               {SITE_TAGLINE}
             </p>
+            <div className="mt-4 inline-flex rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-cma-yellow">
+              Trusted coaching in Dholpur
+            </div>
             <div className="mt-5 flex gap-2">
               {social.map(({ href, Icon, label }) => (
                 <a

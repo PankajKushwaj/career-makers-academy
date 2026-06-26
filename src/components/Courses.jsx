@@ -56,11 +56,17 @@ export function Courses() {
               <motion.article
                 key={course.id}
                 variants={item}
-                className="group flex flex-col rounded-2xl border border-slate-200/80 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-cma-blue/35 hover:shadow-md dark:border-slate-800 dark:bg-slate-900/60 dark:hover:border-cma-yellow/35"
+                whileHover={{ y: -6, scale: 1.01, boxShadow: '0 20px 45px -20px rgba(75,95,165,0.32)' }}
+                transition={{ type: 'spring', stiffness: 220, damping: 18 }}
+                className="group flex flex-col rounded-2xl border border-slate-200/80 bg-white p-6 shadow-sm transition hover:border-cma-blue/35 hover:shadow-md dark:border-slate-800 dark:bg-slate-900/60 dark:hover:border-cma-yellow/35"
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-cma-blue to-cma-blue-dark text-white shadow-md shadow-cma-blue/25 transition group-hover:scale-105">
+                <motion.div
+                  whileHover={{ rotate: 6, scale: 1.08 }}
+                  transition={{ type: 'spring', stiffness: 220, damping: 16 }}
+                  className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-cma-blue to-cma-blue-dark text-white shadow-md shadow-cma-blue/25 transition group-hover:scale-105"
+                >
                   <Icon className="h-5 w-5" aria-hidden />
-                </div>
+                </motion.div>
                 <h3 className="font-display mt-4 text-lg font-bold text-slate-900 dark:text-white">
                   {course.title}
                 </h3>

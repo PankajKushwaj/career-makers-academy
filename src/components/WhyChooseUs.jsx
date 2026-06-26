@@ -59,6 +59,8 @@ export function WhyChooseUs() {
               <motion.div
                 key={f.title}
                 variants={card}
+                whileHover={{ y: -4, scale: 1.01, boxShadow: '0 14px 35px -20px rgba(59, 130, 246, 0.35)' }}
+                transition={{ type: 'spring', stiffness: 220, damping: 18 }}
                 className="rounded-2xl border border-slate-200/70 bg-white/90 p-5 shadow-sm backdrop-blur-sm dark:border-slate-800 dark:bg-slate-900/70"
               >
                 <div className="flex items-start gap-3">
