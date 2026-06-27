@@ -56,7 +56,7 @@ function useLocalCollection(key, defaultItems) {
   return [items, setItems]
 }
 
-export function AdminPanel({ onLogout }) {
+export function AdminPanel({ token, onLogout }) {
   const [activeSection, setActiveSection] = useState('results')
   const [results, setResults] = useLocalCollection(STORAGE_KEYS_EXPORT.results, RESULT_RECORDS)
   const [resultImages, setResultImages] = useLocalCollection(STORAGE_KEYS_EXPORT.resultImages, RESULT_IMAGES)
@@ -178,6 +178,9 @@ export function AdminPanel({ onLogout }) {
       try {
         response = await fetch(endpoint, {
           method: 'POST',
+          headers: {
+            Authorization: token ? `Bearer ${token}` : undefined,
+          },
           body: formData,
         })
 

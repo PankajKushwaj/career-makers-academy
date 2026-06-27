@@ -1,41 +1,40 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { ADMIN_CREDENTIALS, ADMIN_SESSION_KEY } from '../data/siteData'
+import { getApiUrl, fetchJson } from '../utils/api.js'
+import { useAuth } from '../hooks/useAuth.js'
 import { AdminPanel } from './AdminPanel'
 
 export function AdminPage() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
-  const [authenticated, setAuthenticated] = useState(false)
+  const { token, setToken, logout, isAuthenticated } = useAuth()
 
-  useEffect(() => {
-    const stored = typeof window !== 'undefined' ? sessionStorage.getItem(ADMIN_SESSION_KEY) : null
-    setAuthenticated(stored === 'true')
-  }, [])
-
-  const handleLogin = (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault()
-    if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
-      sessionStorage.setItem(ADMIN_SESSION_KEY, 'true')
-      setAuthenticated(true)
-      setError('')
-      return
-    }
 
-    setError('Invalid username or password. Please try again.')
+    try {
+      const data = await fetchJson(getApiUrl('/auth/login'), {
+        method: 'POST',
+        body: JSON.stringify({ username, password }),
+      })
+
+      setToken(data.token)
+      setError('')
+    } catch (err) {
+      setError(err.message || 'Invalid username or password. Please try again.')
+    }
   }
 
   const handleLogout = () => {
-    sessionStorage.removeItem(ADMIN_SESSION_KEY)
-    setAuthenticated(false)
+    logout()
     setUsername('')
     setPassword('')
     window.location.hash = '#home'
   }
 
-  if (authenticated) {
-    return <AdminPanel onLogout={handleLogout} />
+  if (isAuthenticated) {
+    return <AdminPanel token={token} onLogout={handleLogout} />
   }
 
   return (

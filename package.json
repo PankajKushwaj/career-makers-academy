@@ -12,19 +12,27 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "cloudinary": "^2.1.41",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "express-rate-limit": "^6.8.0",
+    "framer-motion": "^12.42.0",
+    "helmet": "^7.0.0",
+    "hpp": "^0.2.3",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^7.3.4",
+    "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
-    "framer-motion": "^12.38.0",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
-    "react-icons": "^5.6.0"
+    "react-icons": "^5.6.0",
+    "xss-clean": "^0.1.1"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1",
     "@eslint/js": "^10.0.1",
     "@tailwindcss/vite": "^4.2.4",
     "@types/react": "^19.2.14",
@@ -34,6 +42,7 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.5.0",
+    "nodemon": "^3.0.1",
     "tailwindcss": "^4.2.4",
     "vite": "^8.0.10"
   }

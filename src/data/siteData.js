@@ -464,13 +464,6 @@ export function getWhatsAppUrl(message = WHATSAPP_MESSAGE) {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`
 }
 
-export const ADMIN_CREDENTIALS = {
-  username: 'admin',
-  password: 'CMA@Admin2026!',
-}
-
-export const ADMIN_SESSION_KEY = 'cma-admin-auth'
-
 const STORAGE_KEYS = {
   results: 'cma-results',
   resultImages: 'cma-result-images',
