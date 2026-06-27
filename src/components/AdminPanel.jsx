@@ -72,7 +72,7 @@ export function AdminPanel({ onLogout }) {
       default:
         return []
     }
-  }, [activeSection, results, resultImages, gallery, notices, testimonials])
+  }, [activeSection, results, resultImages, yearlyToppers, gallery, notices, testimonials])
 
   const setActiveItems = (items) => {
     switch (activeSection) {
