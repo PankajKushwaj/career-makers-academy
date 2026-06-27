@@ -466,7 +466,7 @@ export function getWhatsAppUrl(message = WHATSAPP_MESSAGE) {
 
 export const ADMIN_CREDENTIALS = {
   username: 'admin',
-  password: 'cmaStrongPass1!',
+  password: 'CMA@Admin2026!',
 }
 
 export const ADMIN_SESSION_KEY = 'cma-admin-auth'
