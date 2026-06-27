@@ -2,6 +2,7 @@ import express from 'express'
 import multer from 'multer'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { v2 as cloudinary } from 'cloudinary'
 import ResultRecord from '../models/ResultRecord.js'
 import ResultImage from '../models/ResultImage.js'
 import YearlyTopper from '../models/YearlyTopper.js'
@@ -11,6 +12,12 @@ const router = express.Router()
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+})
+
 const uploadDir = path.join(__dirname, '..', 'uploads')
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, uploadDir),
@@ -18,6 +25,19 @@ const storage = multer.diskStorage({
 })
 
 const upload = multer({ storage })
+
+const uploadToCloudinary = async (file) => {
+  if (!process.env.CLOUDINARY_CLOUD_NAME || !process.env.CLOUDINARY_API_KEY || !process.env.CLOUDINARY_API_SECRET) {
+    return null
+  }
+
+  const result = await cloudinary.uploader.upload(file.path, {
+    folder: 'cma-results',
+    resource_type: 'image',
+  })
+
+  return result.secure_url
+}
 
 // Results CRUD
 router.get('/results', async (req, res) => {
@@ -47,7 +67,13 @@ router.get('/result-images', async (req, res) => {
 })
 
 router.post('/result-images', upload.single('image'), async (req, res) => {
-  const src = req.file ? `/uploads/${req.file.filename}` : req.body.src
+  let src = req.body.src
+
+  if (req.file) {
+    const cloudUrl = await uploadToCloudinary(req.file)
+    src = cloudUrl || `/uploads/${req.file.filename}`
+  }
+
   const doc = await ResultImage.create({ src, ...req.body })
   res.json(doc)
 })
@@ -69,7 +95,13 @@ router.get('/yearly-toppers', async (req, res) => {
 })
 
 router.post('/yearly-toppers', upload.single('image'), async (req, res) => {
-  const image = req.file ? `/uploads/${req.file.filename}` : req.body.image
+  let image = req.body.image
+
+  if (req.file) {
+    const cloudUrl = await uploadToCloudinary(req.file)
+    image = cloudUrl || `/uploads/${req.file.filename}`
+  }
+
   const doc = await YearlyTopper.create({ image, ...req.body })
   res.json(doc)
 })

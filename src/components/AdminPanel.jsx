@@ -35,6 +35,7 @@ const emptyYearlyTopper = {
 const emptyGallery = { src: '', category: '', caption: '' }
 const emptyNotice = { id: '', title: '', message: '', type: 'info' }
 const emptyTestimonial = { name: '', course: '', image: '', rating: 5, parent: '', text: '', story: '', video: false }
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000/api'
 
 function useLocalCollection(key, defaultItems) {
   const [items, setItems] = useState(() => loadData(key, defaultItems))
@@ -54,6 +55,8 @@ export function AdminPanel({ onLogout }) {
   const [gallery, setGallery] = useLocalCollection(STORAGE_KEYS_EXPORT.gallery, GALLERY_SLIDES)
   const [notices, setNotices] = useLocalCollection(STORAGE_KEYS_EXPORT.notices, NOTICES)
   const [testimonials, setTestimonials] = useLocalCollection(STORAGE_KEYS_EXPORT.testimonials, TESTIMONIALS)
+  const [uploadStatus, setUploadStatus] = useState('')
+  const [isUploading, setIsUploading] = useState(false)
 
   const activeItems = useMemo(() => {
     switch (activeSection) {
@@ -132,6 +135,60 @@ export function AdminPanel({ onLogout }) {
     setActiveItems(updated)
   }
 
+  const handleDirectUpload = async (index, file) => {
+    if (!file) return
+
+    setIsUploading(true)
+    setUploadStatus('Uploading image...')
+
+    try {
+      const endpoint = activeSection === 'result-images'
+        ? `${API_BASE_URL}/result-images`
+        : `${API_BASE_URL}/yearly-toppers`
+
+      const formData = new FormData()
+      formData.append('image', file)
+
+      if (activeSection === 'result-images') {
+        const currentItem = activeItems[index] || {}
+        formData.append('title', currentItem.title || '')
+        formData.append('caption', currentItem.caption || '')
+        formData.append('year', currentItem.year || '')
+      } else {
+        const currentItem = activeItems[index] || {}
+        formData.append('year', currentItem.year || '')
+        formData.append('name', currentItem.name || '')
+        formData.append('course', currentItem.course || '')
+        formData.append('rank', currentItem.rank || '')
+        formData.append('percentage', currentItem.percentage || '')
+      }
+
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        body: formData,
+      })
+
+      if (!response.ok) {
+        throw new Error('Image upload failed')
+      }
+
+      const data = await response.json()
+      const updated = [...activeItems]
+      updated[index] = {
+        ...updated[index],
+        ...(activeSection === 'result-images'
+          ? { src: data.src, id: data._id || data.id }
+          : { image: data.image, id: data._id || data.id }),
+      }
+      setActiveItems(updated)
+      setUploadStatus('Image uploaded successfully.')
+    } catch (error) {
+      setUploadStatus(error.message || 'Image upload failed.')
+    } finally {
+      setIsUploading(false)
+    }
+  }
+
   return (
     <section className="min-h-screen bg-slate-100 py-10 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -169,6 +226,9 @@ export function AdminPanel({ onLogout }) {
         <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-lg dark:border-slate-800 dark:bg-slate-900">
           <div className="mb-4 flex items-center justify-between gap-3">
             <h2 className="text-xl font-semibold text-slate-900 dark:text-white">{sections.find((section) => section.id === activeSection)?.label}</h2>
+            {uploadStatus ? (
+              <p className="text-sm text-cma-blue dark:text-cma-yellow">{uploadStatus}</p>
+            ) : null}
             <button
               type="button"
               onClick={addItem}
@@ -311,6 +371,16 @@ export function AdminPanel({ onLogout }) {
                             className="mt-2 w-full rounded-2xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-cma-blue focus:ring-2 focus:ring-cma-blue/20 dark:border-slate-700 dark:bg-slate-900 dark:text-white"
                           />
                         </label>
+                        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
+                          Upload image
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={(event) => handleDirectUpload(index, event.target.files?.[0])}
+                            className="mt-2 w-full rounded-2xl border border-dashed border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-cma-blue focus:ring-2 focus:ring-cma-blue/20 dark:border-slate-700 dark:bg-slate-900 dark:text-white"
+                          />
+                          {isUploading ? <p className="mt-2 text-xs text-cma-blue">Uploading…</p> : null}
+                        </label>
                       </>
                     )}
 
@@ -363,6 +433,16 @@ export function AdminPanel({ onLogout }) {
                             onChange={(event) => updateField(index, 'image', event.target.value)}
                             className="mt-2 w-full rounded-2xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-cma-blue focus:ring-2 focus:ring-cma-blue/20 dark:border-slate-700 dark:bg-slate-900 dark:text-white"
                           />
+                        </label>
+                        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
+                          Upload image
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={(event) => handleDirectUpload(index, event.target.files?.[0])}
+                            className="mt-2 w-full rounded-2xl border border-dashed border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-cma-blue focus:ring-2 focus:ring-cma-blue/20 dark:border-slate-700 dark:bg-slate-900 dark:text-white"
+                          />
+                          {isUploading ? <p className="mt-2 text-xs text-cma-blue">Uploading…</p> : null}
                         </label>
                       </>
                     )}

@@ -1,12 +1,26 @@
-import { useMemo } from 'react'
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { YEARLY_TOPPERS, STORAGE_KEYS_EXPORT, loadData } from '../data/siteData'
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000/api'
+
 export function YearlyToppers() {
-  const toppers = useMemo(
-    () => loadData(STORAGE_KEYS_EXPORT.yearlyToppers, YEARLY_TOPPERS),
-    [],
-  )
+  const [toppers, setToppers] = useState(() => loadData(STORAGE_KEYS_EXPORT.yearlyToppers, YEARLY_TOPPERS))
+
+  useEffect(() => {
+    const loadToppers = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/yearly-toppers`)
+        if (!response.ok) return
+        const data = await response.json()
+        setToppers(Array.isArray(data) ? data : [])
+      } catch {
+        // fall back to local data
+      }
+    }
+
+    loadToppers()
+  }, [])
 
   if (!toppers.length) {
     return null

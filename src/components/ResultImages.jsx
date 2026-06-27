@@ -1,12 +1,26 @@
-import { useMemo } from 'react'
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { RESULT_IMAGES, STORAGE_KEYS_EXPORT, loadData } from '../data/siteData'
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000/api'
+
 export function ResultImages() {
-  const resultImages = useMemo(
-    () => loadData(STORAGE_KEYS_EXPORT.resultImages, RESULT_IMAGES),
-    [],
-  )
+  const [resultImages, setResultImages] = useState(() => loadData(STORAGE_KEYS_EXPORT.resultImages, RESULT_IMAGES))
+
+  useEffect(() => {
+    const loadImages = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/result-images`)
+        if (!response.ok) return
+        const data = await response.json()
+        setResultImages(Array.isArray(data) ? data : [])
+      } catch {
+        // fall back to local data
+      }
+    }
+
+    loadImages()
+  }, [])
 
   if (!resultImages.length) {
     return null
