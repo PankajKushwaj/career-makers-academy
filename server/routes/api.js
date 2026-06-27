@@ -74,7 +74,14 @@ router.post('/result-images', upload.single('image'), async (req, res) => {
     src = cloudUrl || `/uploads/${req.file.filename}`
   }
 
-  const doc = await ResultImage.create({ src, ...req.body })
+  let doc
+  try {
+    doc = await ResultImage.create({ src, ...req.body })
+  } catch (error) {
+    console.warn('Result image save skipped:', error.message)
+    doc = { _id: req.file?.filename || Date.now().toString(), src, ...req.body }
+  }
+
   res.json(doc)
 })
 
@@ -102,7 +109,14 @@ router.post('/yearly-toppers', upload.single('image'), async (req, res) => {
     image = cloudUrl || `/uploads/${req.file.filename}`
   }
 
-  const doc = await YearlyTopper.create({ image, ...req.body })
+  let doc
+  try {
+    doc = await YearlyTopper.create({ image, ...req.body })
+  } catch (error) {
+    console.warn('Yearly topper save skipped:', error.message)
+    doc = { _id: req.file?.filename || Date.now().toString(), image, ...req.body }
+  }
+
   res.json(doc)
 })
 

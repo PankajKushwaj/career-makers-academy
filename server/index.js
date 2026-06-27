@@ -5,9 +5,10 @@ import fs from 'fs'
 import mongoose from 'mongoose'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import apiRouter from './routes/api.js'
 
 dotenv.config()
+
+const { default: apiRouter } = await import('./routes/api.js')
 
 const app = express()
 app.use(cors())
@@ -27,19 +28,18 @@ const PORT = process.env.PORT || 4000
 const MONGO_URI = process.env.MONGO_URI
 
 if (!MONGO_URI) {
-  console.error('MONGO_URI is not set. Add your MongoDB Atlas connection string to the environment.')
-  process.exit(1)
+  console.warn('MONGO_URI is not set. Uploads will still work through Cloudinary, but database persistence is disabled.')
+} else {
+  mongoose
+    .connect(MONGO_URI, { serverSelectionTimeoutMS: 5000 })
+    .then(() => {
+      console.log('Connected to MongoDB')
+    })
+    .catch((err) => {
+      console.warn('MongoDB connection warning:', err.message)
+    })
 }
 
-mongoose
-  .connect(MONGO_URI)
-  .then(() => {
-    console.log('Connected to MongoDB')
-    app.listen(PORT, () => console.log(`Server listening on ${PORT}`))
-  })
-  .catch((err) => {
-    console.error('MongoDB connection error', err)
-    process.exit(1)
-  })
+app.listen(PORT, () => console.log(`Server listening on ${PORT}`))
 
 export default app
