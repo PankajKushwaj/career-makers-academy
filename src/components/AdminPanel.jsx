@@ -35,7 +35,16 @@ const emptyYearlyTopper = {
 const emptyGallery = { src: '', category: '', caption: '' }
 const emptyNotice = { id: '', title: '', message: '', type: 'info' }
 const emptyTestimonial = { name: '', course: '', image: '', rating: 5, parent: '', text: '', story: '', video: false }
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000/api'
+const API_BASE_URL = (import.meta.env.VITE_API_URL || '/api').replace(/\/$/, '')
+
+const getApiEndpoint = (path) => `${API_BASE_URL}/${path.replace(/^\//, '')}`
+
+const readFileAsDataUrl = (file) => new Promise((resolve, reject) => {
+  const reader = new FileReader()
+  reader.onload = () => resolve(reader.result)
+  reader.onerror = reject
+  reader.readAsDataURL(file)
+})
 
 function useLocalCollection(key, defaultItems) {
   const [items, setItems] = useState(() => loadData(key, defaultItems))
@@ -143,8 +152,8 @@ export function AdminPanel({ onLogout }) {
 
     try {
       const endpoint = activeSection === 'result-images'
-        ? `${API_BASE_URL}/result-images`
-        : `${API_BASE_URL}/yearly-toppers`
+        ? getApiEndpoint('/result-images')
+        : getApiEndpoint('/yearly-toppers')
 
       const formData = new FormData()
       formData.append('image', file)
@@ -163,25 +172,34 @@ export function AdminPanel({ onLogout }) {
         formData.append('percentage', currentItem.percentage || '')
       }
 
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        body: formData,
-      })
+      let uploadedUrl = ''
+      let response
 
-      if (!response.ok) {
-        throw new Error('Image upload failed')
+      try {
+        response = await fetch(endpoint, {
+          method: 'POST',
+          body: formData,
+        })
+
+        if (!response.ok) {
+          throw new Error('Image upload failed')
+        }
+
+        const data = await response.json()
+        uploadedUrl = data.src || data.image || ''
+      } catch {
+        uploadedUrl = await readFileAsDataUrl(file)
       }
 
-      const data = await response.json()
       const updated = [...activeItems]
       updated[index] = {
         ...updated[index],
         ...(activeSection === 'result-images'
-          ? { src: data.src, id: data._id || data.id }
-          : { image: data.image, id: data._id || data.id }),
+          ? { src: uploadedUrl, id: uploadedUrl ? updated[index].id : updated[index].id }
+          : { image: uploadedUrl, id: updated[index].id }),
       }
       setActiveItems(updated)
-      setUploadStatus('Image uploaded successfully.')
+      setUploadStatus(uploadedUrl.startsWith('data:') ? 'Image saved locally for preview.' : 'Image uploaded successfully.')
     } catch (error) {
       setUploadStatus(error.message || 'Image upload failed.')
     } finally {
